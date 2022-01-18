@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt #on laisse dans le doute
+from sklearn.neural_network import MLPClassifier
 import pandas as pand
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import confusion_matrix
@@ -16,37 +17,34 @@ if __name__ == "__main__":
     outputs = data['label']
     print(f'label shape : {outputs.shape}')
 
-    binaryOutputs = []
-
+    isFakeLabels = []
     for i in range(len(outputs)):
         if outputs[i] == 'FAKE':
-            binaryOutputs.append(0)
+            isFakeLabels.append(0)
         else:
-            binaryOutputs.append(1)
+            isFakeLabels.append(1)
 
-    data_labels = binaryOutputs
-    x_train, x_test, y_train, y_test = train_test_split(data['text'], data_labels, test_size=0.1, random_state=0)
+    #On split le JDD
+    train_article_inputs, test_articles, train_article_desired, test_article_desired = train_test_split(data['text'], isFakeLabels, test_size=0.1, random_state=0)
 
-    #Methode TFIDF pour lire la réccurence des mots
+    #Methode TFIDF pour lire la réccurence des mots, fréquence.
+    #Vectorisation du text
     tfidf = TfidfVectorizer()
 
-    tfidf_train = tfidf.fit_transform(x_train) 
-    tfidf_test = tfidf.transform(x_test)
+    tfidf_train = tfidf.fit_transform(train_article_inputs) 
+    tfidf_test = tfidf.transform(test_articles)
     tfidf_test_final = tfidf.transform(data['text'])
 
     # Classification -> Faut trouver un algo de classification, VOIR AVEC LE PROF
-    # Ce documenter sur le PassiveAgressiveClassifier()
-    # Description du site : Robust regression aims to fit a regression model 
-    # in the presence of corrupt data: either outliers, 
-    # or error in the model.
-    passiveAgressiveClassifier = PassiveAggressiveClassifier()
-    passiveAgressiveClassifier.fit(tfidf_train, y_train)
-    y_pred = passiveAgressiveClassifier.predict(tfidf_test)
+    # Trouver un Classifier qui convient
+    mlpClassifer = MLPClassifier()
+    mlpClassifer.fit(tfidf_train, train_article_desired)
+    prediction = mlpClassifer.predict(tfidf_test)
 
     #Score
-    score = accuracy_score(y_test, y_pred)
-    print(f'Accuracy: {round(score * 100, 2)}%')
+    score = accuracy_score(test_article_desired, prediction)
+    print(f'score: {round(score * 100, 2)}%')
 
     #Matrice de confusion
-    cmat = confusion_matrix(y_test,y_pred)
+    cmat = confusion_matrix(test_article_desired,prediction)
     print(cmat)
