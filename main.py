@@ -5,6 +5,17 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from flask import Flask, render_template, jsonify
+
+@app.route('/api/fakenews/')
+# Création de l'API
+def resultFakeNews():
+    dictionnary = {
+        'isFake': 'false',
+        'percentage': '{score}'
+    }
+    return jsonify(dictionnary)
+
 
 if __name__ == "__main__":
 
