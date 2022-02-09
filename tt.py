@@ -7,24 +7,24 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-app = Flask(__name__, template_folder='website')
+app = Flask(__name__)
 
 tfidf = TfidfVectorizer(stop_words='english', max_features=21405)
 mlpClassifer = MLPClassifier()
 
 @app.route('/')
 def form_template():
-    return render_template('index.html')
+    return render_template('form.html')
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    text = request.form['articleForm']
+    text = request.form['text']
     processed_text = [text]
     vecotrizedText = tfidf.transform(processed_text)
     predict = mlpClassifer.predict(vecotrizedText)
     predictProba = mlpClassifer.predict_proba(vecotrizedText)
     result = 'TRUE' if predict[0] != 0 else 'FALSE'
-    return render_template('index.html', result='1234')
+    return render_template('form.html', result=result)
 
 if __name__ == "__main__":
 
