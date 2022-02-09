@@ -18,13 +18,13 @@ def form_template():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    text = request.form['articleForm']
+    text = request.form.get("article")
     processed_text = [text]
     vecotrizedText = tfidf.transform(processed_text)
     predict = mlpClassifer.predict(vecotrizedText)
     predictProba = mlpClassifer.predict_proba(vecotrizedText)
     result = 'TRUE' if predict[0] != 0 else 'FALSE'
-    return render_template('index.html', result='1234')
+    return render_template('index.html', result=result)
 
 if __name__ == "__main__":
 

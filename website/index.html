@@ -18,8 +18,7 @@
 		<div class="flex-c-m bg-img1 size2 where1 overlay1 where2 respon2" style="background-image: url_for('static',filename='images/bg01.jpg')">
 			<div class="wsize2 flex-w flex-c-m cd100 js-tilt">
 				<div class="flex-col-c-m size6 bor2 m-l-10 m-r-10 m-t-15">
-					<span class="l2-txt1 p-b-9 days">?</span>
-					<span class="s2-txt4">{{ result }}</span>
+					<span class="l2-txt1 p-b-9 days">{{ result }}</span>
 				</div>
 			</div>
 		</div>
@@ -35,17 +34,16 @@
 					Our website detect if your article contains <span class="m1-txt2">FAKE NEWS</span>
 				</p>
 
-				<form class="contact100-form validate-form" name="articleForm" id="articleForm" method="post">
+
+				<form class="contact100-form validate-form" method="post" id="article-form">
 					<div class="wrap-input100 m-b-10 validate-input" data-validate = "Text is required">
-						<input class="s2-txt1 placeholder0 input100" type="text" name="articleText" id="articleText" placeholder="Your article">
-						<span class="focus-input100"></span>
+						<input rows="10" class="s2-txt1 placeholder0 input100" type="text" name="article" id="article">
 					</div>
 					<div class="w-full">
-						<button class="flex-c-m s2-txt2 size4 bg1 bor1 hov1 trans-04" type="submit">
-							Submit
-						</button>
+						<button class="flex-c-m s2-txt2 size4 bg1 bor1 hov1 trans-04" type="submit">submit</button>
 					</div>
 				</form>
+				
 			</div>
 
 			<div class="flex-w">
