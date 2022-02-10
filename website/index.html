@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Fake News Detector!</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="{{ url_for('static',filename='images/icons/favicon.ico') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static',filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='vendor/animate/animate.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='vendor/select2/select2.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/util.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
 </head>
+
 <body>
-	
-	<div class="size1 bg0 where1-parent"> 	
-		<div class="flex-c-m bg-img1 size2 where1 overlay1 where2 respon2" style="background-image: url(https://images.unsplash.com/photo-1585621243952-f68eae991dd6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2485&q=80)">
+
+	<div class="size1 bg0 where1-parent">
+		<div class="flex-c-m bg-img1 size2 where1 overlay1 where2 respon2"
+			style="background-image: url(https://images.unsplash.com/photo-1585621243952-f68eae991dd6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2485&q=80)">
 			<div class="wsize2 flex-w flex-c-m cd100 js-tilt">
 				<div class="flex-col-c-m size6 bor2 m-l-10 m-r-10 m-t-15">
 					<span class="l2-txt1 p-b-9 days">{{ result }}</span>
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- Form -->
 		<div class="size3 flex-col-sb flex-w p-l-75 p-r-75 p-t-45 p-b-45 respon1">
 			<div class="wrap-pic1">
-				<img src= "{{ url_for('static', filename='images/icons/logo.png') }}" alt="LOGO">
+				<img src="{{ url_for('static', filename='images/icons/logo.png') }}" alt="LOGO">
 			</div>
 
 			<div class="p-t-10 p-b-100">
@@ -35,16 +40,16 @@
 				</p>
 
 				<form class="contact100-form validate-form" name="articleForm" id="articleForm" method="post">
-					<div class="m-b-10 validate-input" data-validate = "Text is required">
+					<div class="m-b-10 validate-input" data-validate="Text is required">
 						<div class="form-group green-border-focus">
-							<textarea class="form-control" id="exampleFormControlTextarea5" rows="15" name="article" id="article" placeholder="Paste your article here..."></textarea>
+							<textarea class="form-control" rows="15" id="article" name="article"
+								placeholder="Paste your article here..."></textarea>
 						</div>
 					</div>
 					<div class="w-full">
 						<button class="flex-c-m s2-txt2 size4 bg1 bor1 hov1 trans-04" type="submit">submit</button>
 					</div>
 				</form>
-				
 			</div>
 
 			<div class="flex-w">
@@ -53,16 +58,9 @@
 		</div>
 	</div>
 
-
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/tilt/tilt.jquery.min.js') }}"></script>
-	<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
 
 </body>
+
 </html>

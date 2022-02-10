@@ -14,7 +14,7 @@ mlpClassifer = MLPClassifier()
 
 @app.route('/')
 def form_template():
-    return render_template('index.html')
+    return render_template('index.html', result = '?')
 
 @app.route('/', methods=['POST'])
 def my_form_post():
@@ -23,7 +23,7 @@ def my_form_post():
     vecotrizedText = tfidf.transform(processed_text)
     predict = mlpClassifer.predict(vecotrizedText)
     predictProba = mlpClassifer.predict_proba(vecotrizedText)
-    result = 'TRUE' if predict[0] != 0 else 'FALSE'
+    result = 'TRUE' if predict[0] != 0 else 'FAKE'
     return render_template('index.html', result=result)
 
 if __name__ == "__main__":
