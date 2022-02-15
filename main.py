@@ -12,7 +12,7 @@ from sklearn.metrics import accuracy_score
 
 app = Flask(__name__, template_folder='website')
 
-tfidf = TfidfVectorizer(max_features=21405)
+tfidf = TfidfVectorizer()
 mlpClassifer = MLPClassifier()
 
 @app.route('/')
@@ -26,6 +26,8 @@ def my_form_post():
     vecotrizedText = tfidf.transform(processed_text)
     predict = mlpClassifer.predict(vecotrizedText)
     predictProba = mlpClassifer.predict_proba(vecotrizedText)
+    print(f'preditct : { predict }')
+    print(f'preditct proba : { predictProba }')
     result = 'TRUE' if predict[0] != 0 else 'FAKE'
     return render_template('index.html', result=result)
 
@@ -53,12 +55,12 @@ if __name__ == "__main__":
 
     # Methode TFIDF pour lire la réccurence des mots, fréquence. 
     # Vectorisation de la pensée
+    # fréquence mot et leur réccurence.
     tfidf_train = tfidf.fit_transform(train_article_inputs) 
     tfidf_test = tfidf.transform(test_articles)
 
     # Classification Test -> MLP
     mlpClassifer.fit(tfidf_train, train_article_desired)
-    print(f'coef len: {len(mlpClassifer.coefs_[0])}')
     prediction = mlpClassifer.predict(tfidf_test)
 
     # Data for KMEANS
@@ -74,9 +76,11 @@ if __name__ == "__main__":
 
     # Score
     mlpClassifierScore = accuracy_score(test_article_desired, prediction)
+    #score d'environ 90%
     print(f'mlpClassifier score: {mlpClassifierScore}')
 
     # Matrice de confusion
+    # en general nous avons environ 10% de faux négatif / faux positif
     cmat = confusion_matrix(test_article_desired,prediction)
     print(cmat)
     display_cmat = ConfusionMatrixDisplay(confusion_matrix=cmat)
